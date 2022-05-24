@@ -1,0 +1,126 @@
+<div class="container">
+    <div class="shadow-lg p-5">
+        <div class="row mt-5">
+            <div class="col-6">
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <div class="p-2 h4">
+                        <span>Name:</span>
+                        {% if guest.user.id != request.user.id %}
+                        <span class="font-weight-normal">{{guest.user.first_name}} </span>
+                        {% else %}
+                        <input type="text" class="form-control border border-secondary" id="id_first_name"
+                            value="{{guest.user.first_name}}" name="first_name">
+                        {% endif %}
+                    </div>
+
+                    <div class="p-2 h4">
+                        <span>Surname:</span>
+                        {% if guest.user.id != request.user.id %}
+                        <span class="font-weight-normal"> {{guest.user.last_name}}</span>
+                        {% else %}
+                        <input type="text" class="form-control border border-secondary" id="id_last_name"
+                            value="{{guest.user.last_name}}" name="last_name">
+                        {% endif %}
+                    </div>
+            </div>
+
+            <div class="col-6">
+
+                <div class="p-2 h4">
+                    <span>Phone Number: </span>
+                    {% if guest.user.id != request.user.id %}
+
+                    <span class="font-weight-normal">{{guest.phoneNumber}}</span>
+                    {% else %}
+                    <input type="text" class="form-control border border-secondary" id="id_phoneNumber"
+                        value="{{guest.phoneNumber}}" name="phoneNumber">
+                    {% endif %}
+                </div>
+
+                <div class="p-2 h4">
+                    <span>Email:</span>
+                    {% if guest.user.id != request.user.id %}
+                    <span class="font-weight-normal"> {{guest.user.email}}</span>
+                    {% else %}
+                    <input type="text" class="form-control border border-secondary" id="id_email"
+                        value="{{guest.user.email}}" name="guest.user.email">
+                    {% endif %}
+                </div>
+               
+                {% if guest.user.id == request.user.id %}
+                <button type="submit" name="submit" class="btn btn-success float-right">Save Changes</button>
+                {% endif %}
+                </form>
+            </div>
+        </div>
+
+        <br>
+
+        {% if eventAttendees.first != None %}
+        <div class="row">
+            <h4>List Of Attended Events</h4>
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Type</th>
+                        <th>Location</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for eveAt in eventAttendees %}
+                    <tr>
+                        <td>{{eveAt.eventType}}</td>
+                        <td>{{eveAt.location}}</td>
+                        <td>{{eveAt.startDate}}</td>
+                        <td>{{eveAt.endtDate}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+        {% endif %}
+
+        <br>
+
+        <div class="row">
+            <div class="table-responsive table-striped my-5">
+                <div class="table-header row">
+
+                    <div class="col-sm-12 col-md-12 col-lg-4 mb-4">
+                        <h2>History</h2>
+                    </div>
+
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Room ID</th>
+                            <th>Reservation Date</th>
+                            <th>Check in Date</th>
+                            <th>Check out Date</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for bo in bookings %}
+                        <tr>
+                            <td>{{bo.roomNumber}}</td>
+                            <td>{{bo.dateOfReservation}}</td>
+                            <td>{{bo.startDate}}</td>
+                            <td>{{bo.endDate}}</td>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

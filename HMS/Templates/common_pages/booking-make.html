@@ -1,0 +1,40 @@
+<div class="container">
+
+    <div class="row py-5 h5">
+        <p>You are currently trying to book This room:
+            <br>
+            Between {{fd}} - {{ld}}
+            <br>
+            Room Number : {{ room.number }}
+            <br>
+            Room capacity : {{ room.capacity }}
+            <br>
+            Number of beds in the room : {{ room.numberOfBeds }}
+            <br>
+            Room Type : {{ room.roomType }}
+            <br>
+            Room price : {{ room.price }}
+            <br>
+            <br>
+            Total price : {{total}}
+        </p>
+    </div>
+
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class=row>
+            <input type="hidden" value="{{ room }}" name="roomid">
+            <input type="date" value="{{ fd }}" name="fd" class="d-none">
+            <input type="date" value="{{ ld }}" name="ld" class="d-none">
+           
+            <button type="submit" class="btn btn-info w-100 mt-3" name="bookGuestButton">Book</button>
+        </div>
+    </form>
+
+
+    <div class="py-3">
+        &nbsp
+    </div>
+
+</div>
